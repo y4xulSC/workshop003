@@ -1,0 +1,17 @@
+FROM python:3.9-slim
+
+WORKDIR /app
+
+RUN pip install --no-cache-dir \
+    confluent-kafka \
+    pandas \
+    sqlalchemy \
+    mysql-connector-python \
+    scikit-learn \
+    xgboost \
+    matplotlib
+
+COPY src/consumer/ . 
+COPY model/GXBoost.pkl .
+
+CMD ["python", "main.py"]
